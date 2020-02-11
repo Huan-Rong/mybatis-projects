@@ -24,9 +24,10 @@ public class MyBatisTest {
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     Assert.assertNotNull(sqlSessionFactory);
 
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    Student student = sqlSession.selectOne("site.bulibucai.dao.StudentMapper.selectById", 1);
-    Assert.assertNotNull(student);
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Student student = sqlSession.selectOne("site.bulibucai.dao.StudentMapper.selectById", 1);
+      Assert.assertNotNull(student);
+    }
   }
 
   @Test
@@ -35,11 +36,11 @@ public class MyBatisTest {
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     Assert.assertNotNull(sqlSessionFactory);
 
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
-    Student student = studentMapper.selectById(1);
-    Assert.assertNotNull(student);
-
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+      Student student = studentMapper.selectById(1);
+      Assert.assertNotNull(student);
+    }
   }
 
 }
