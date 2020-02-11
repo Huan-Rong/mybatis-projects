@@ -7,7 +7,7 @@ package site.bulibucai.bean;
  */
 public class Student {
   private int id;
-  private String last_name;
+  private String lastName;
   private char gender;
 
   public int getId() {
@@ -18,12 +18,12 @@ public class Student {
     this.id = id;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setLast_name(String last_name) {
-    this.last_name = last_name;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public char getGender() {
@@ -38,7 +38,7 @@ public class Student {
   public String toString() {
     return "Student{" +
         "id=" + id +
-        ", last_name='" + last_name + '\'' +
+        ", lastName='" + lastName + '\'' +
         ", gender=" + gender +
         '}';
   }

@@ -26,6 +26,7 @@ public class MyBatisTest {
 
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       Student student = sqlSession.selectOne("site.bulibucai.dao.StudentMapper.selectById", 1);
+      Assert.assertNotNull(student.getLastName());
       Assert.assertNotNull(student);
     }
   }
@@ -39,6 +40,7 @@ public class MyBatisTest {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Student student = studentMapper.selectById(1);
+      Assert.assertNotNull(student.getLastName());
       Assert.assertNotNull(student);
     }
   }
