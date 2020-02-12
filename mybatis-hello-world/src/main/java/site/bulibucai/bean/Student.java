@@ -1,10 +1,13 @@
 package site.bulibucai.bean;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * @description:
  * @author: Ian Zheng
  * @date: 2020-02-10
  */
+@Alias("stu")
 public class Student {
   private int id;
   private String lastName;
