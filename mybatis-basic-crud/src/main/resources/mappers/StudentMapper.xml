@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.bulibucai.dao.StudentMapper">
+
+  <select id="getStuById" resultType="site.bulibucai.bean.Student">
+    select * from student where id=#{id}
+  </select>
+
+  <insert id="insertStu" useGeneratedKeys="true" keyProperty="id">
+    insert into student(last_name,gender)
+    values(#{lastName}, #{gender})
+  </insert>
+
+  <update id="updateStu">
+    update student set last_name=#{lastName}, gender=#{gender} where id=#{id}
+  </update>
+
+  <delete id="delStuById">
+    delete from student where id=#{id}
+  </delete>
+
+  <delete id="delStuByGender">
+    delete from student where gender=#{gender}
+  </delete>
+
+</mapper>

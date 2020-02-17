@@ -1,11 +1,13 @@
+package site.bulibucai;
+
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @description:
@@ -20,7 +22,7 @@ public class MyBatisTest {
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
     try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      Assert.assertNotNull(sqlSession);
+      Assertions.assertNotNull(sqlSession);
     }
   }
 
