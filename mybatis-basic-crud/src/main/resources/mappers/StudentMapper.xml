@@ -8,9 +8,17 @@
     select * from student where id=#{id}
   </select>
 
-  <insert id="insertStu" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertStu" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
     insert into student(last_name,gender)
     values(#{lastName}, #{gender})
+  </insert>
+
+  <insert id="insertStu" useGeneratedKeys="true" keyProperty="id" databaseId="oracle">
+    <selectKey keyProperty="id" order="BEFORE" resultType="Integer">
+      select student_seq.nextval from dual
+    </selectKey>
+    insert into student(id,last_name,gender)
+    values(#{id},#{lastName},#{gender})
   </insert>
 
   <update id="updateStu">

@@ -28,7 +28,6 @@ public class StudentMapperTest {
   public static void setUp() throws IOException, SQLException {
     InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
     sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
     DataSource dataSource = sqlSessionFactory.getConfiguration().getEnvironment().getDataSource();
     Connection connection = dataSource.getConnection();
     ScriptRunner scriptRunner = new ScriptRunner(connection);
@@ -37,8 +36,21 @@ public class StudentMapperTest {
     scriptRunner.setLogWriter(null);
     scriptRunner.setErrorLogWriter(null);
 
-    Reader reader = Resources.getResourceAsReader("createDb.sql");
+    String driverName = getDriverName(connection);
+    Reader reader = Resources.getResourceAsReader(driverName + ".sql");
     scriptRunner.runScript(reader);
+  }
+
+  public static String getDriverName(Connection connection) throws SQLException {
+    String originalDriverName = connection.getMetaData().getDriverName().toUpperCase();
+    if (originalDriverName.indexOf("MYSQL") != -1) {
+      return "mysql";
+    } else if (originalDriverName.indexOf("ORACLE") != -1) {
+      return "oracle";
+    } else if (originalDriverName.indexOf("SQL SERVER") != -1) {
+      return "sqlserver";
+    }
+    return null;
   }
 
   @Test
@@ -75,7 +87,7 @@ public class StudentMapperTest {
       Assertions.assertEquals(1, count);
     }
   }
-  
+
   @Test
   public void testDelStuById() {
     try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
