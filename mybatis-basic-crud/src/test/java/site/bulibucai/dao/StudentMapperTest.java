@@ -64,6 +64,15 @@ public class StudentMapperTest {
   }
 
   @Test
+  public void testGetStuByIdAndLastName() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession();){
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      Student student = mapper.getStuByIdAndLastName(1, "nana");
+      Assertions.assertNotNull(student);
+    }
+  }
+
+  @Test
   public void testInsertStu() {
     try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);

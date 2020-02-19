@@ -1,5 +1,6 @@
 package site.bulibucai.dao;
 
+import org.apache.ibatis.annotations.Param;
 import site.bulibucai.bean.Student;
 
 /**
@@ -9,7 +10,9 @@ import site.bulibucai.bean.Student;
  */
 public interface StudentMapper {
 
-  Student getStuById(Integer id);
+  Student getStuById(@Param("id") Integer id);
+
+  Student getStuByIdAndLastName(Integer id, String lastName);
 
   void insertStu(Student student);
 
