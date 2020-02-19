@@ -12,7 +12,7 @@ public interface StudentMapper {
 
   Student getStuById(@Param("id") Integer id);
 
-  Student getStuByIdAndLastName(Integer id, String lastName);
+  Student getStuByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
 
   void insertStu(Student student);
 

@@ -9,7 +9,7 @@
   </select>
 
   <select id="getStuByIdAndLastName" resultType="site.bulibucai.bean.Student">
-    select * from student where id=#{param1} and last_name=#{param2}
+    select * from student where id=#{id} and last_name=#{lastName}
   </select>
 
   <insert id="insertStu" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
