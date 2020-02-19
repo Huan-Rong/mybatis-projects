@@ -73,6 +73,19 @@ public class StudentMapperTest {
   }
 
   @Test
+  public void testGetStuByPojo() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      Student student = new Student();
+      student.setId(1);
+      student.setLastName("nana");
+      Student stu = mapper.getStuByPojo(student);
+      Assertions.assertNotNull(stu);
+      Assertions.assertNotEquals(student, stu);
+    }
+  }
+
+  @Test
   public void testInsertStu() {
     try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);

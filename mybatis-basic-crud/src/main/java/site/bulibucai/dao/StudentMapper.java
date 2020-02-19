@@ -14,6 +14,8 @@ public interface StudentMapper {
 
   Student getStuByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
 
+  Student getStuByPojo(Student student);
+
   void insertStu(Student student);
 
   Integer updateStu(Student student);

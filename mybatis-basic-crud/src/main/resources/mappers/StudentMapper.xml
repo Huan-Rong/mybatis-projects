@@ -12,6 +12,10 @@
     select * from student where id=#{id} and last_name=#{lastName}
   </select>
 
+  <select id="getStuByPojo" resultType="site.bulibucai.bean.Student">
+    select * from student where id=#{id} and last_name=#{lastName}
+  </select>
+
   <insert id="insertStu" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
     insert into student(last_name,gender)
     values(#{lastName}, #{gender})
