@@ -1,5 +1,6 @@
 package site.bulibucai.dao;
 
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import site.bulibucai.bean.Student;
 
@@ -15,6 +16,8 @@ public interface StudentMapper {
   Student getStuByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
 
   Student getStuByPojo(Student student);
+
+  Student getStuByMap(Map<String, Object> map);
 
   void insertStu(Student student);
 

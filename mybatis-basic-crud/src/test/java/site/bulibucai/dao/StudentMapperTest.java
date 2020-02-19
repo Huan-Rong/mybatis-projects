@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.sql.DataSource;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -22,6 +24,7 @@ import site.bulibucai.bean.Student;
  * @date: 2020-02-13
  */
 public class StudentMapperTest {
+
   private static SqlSessionFactory sqlSessionFactory;
 
   @BeforeAll
@@ -55,7 +58,7 @@ public class StudentMapperTest {
 
   @Test
   public void testGetStuById() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Student student = studentMapper.getStuById(1);
       Assertions.assertNotNull(student);
@@ -65,7 +68,7 @@ public class StudentMapperTest {
 
   @Test
   public void testGetStuByIdAndLastName() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession();){
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
       StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
       Student student = mapper.getStuByIdAndLastName(1, "nana");
       Assertions.assertNotNull(student);
@@ -74,7 +77,7 @@ public class StudentMapperTest {
 
   @Test
   public void testGetStuByPojo() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
       Student student = new Student();
       student.setId(1);
@@ -86,8 +89,20 @@ public class StudentMapperTest {
   }
 
   @Test
+  public void testGetStuByMap() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      Map<String, Object> map = new HashMap<>();
+      map.put("id", 1);
+      map.put("lastName", "nana");
+      Student student = mapper.getStuByMap(map);
+      Assertions.assertNotNull(student);
+    }
+  }
+
+  @Test
   public void testInsertStu() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Student student = new Student();
       student.setGender("1");
@@ -101,7 +116,7 @@ public class StudentMapperTest {
 
   @Test
   public void testUpdateStu() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Student student = new Student();
       student.setId(1);
@@ -112,7 +127,7 @@ public class StudentMapperTest {
 
   @Test
   public void testDelStuById() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Integer count = studentMapper.delStuById(1);
       Assertions.assertEquals(1, count);
@@ -121,7 +136,7 @@ public class StudentMapperTest {
 
   @Test
   public void testDelStuByGender() {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
       Integer count = studentMapper.delStuByGender("1");
       Assertions.assertEquals(2, count);
