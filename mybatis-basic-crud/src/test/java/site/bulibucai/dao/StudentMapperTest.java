@@ -41,7 +41,7 @@ public class StudentMapperTest {
     scriptRunner.setErrorLogWriter(null);
 
     String driverName = getDriverName(connection);
-    Reader reader = Resources.getResourceAsReader(driverName + ".sql");
+    Reader reader = Resources.getResourceAsReader("student_" + driverName + ".sql");
     scriptRunner.runScript(reader);
   }
 
@@ -56,6 +56,17 @@ public class StudentMapperTest {
     }
     return null;
   }
+
+  @Test
+  public void testGetStuByLastNameLikeReturnMap() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      Map<Integer, Student> stuByLastNameLikeReturnMap = mapper.getStuByLastNameLikeReturnMap("%a%");
+      Assertions.assertEquals(1, stuByLastNameLikeReturnMap.size());
+      Assertions.assertEquals(true, stuByLastNameLikeReturnMap.containsKey(1));
+      Assertions.assertEquals("nana", stuByLastNameLikeReturnMap.get(1).getLastName());
+    }
+  }
   
   @Test
   public void testGetStuByIdReturnMap() {
@@ -63,7 +74,7 @@ public class StudentMapperTest {
       StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
       Map<String, Object> stuByIdReturnMap = mapper.getStuByIdReturnMap(1);
       Assertions.assertEquals("nana", stuByIdReturnMap.get("lastName"));
-      Assertions.assertEquals(1, stuByIdReturnMap.get("gender"));
+      Assertions.assertEquals("1", stuByIdReturnMap.get("gender"));
     }
   }
   
