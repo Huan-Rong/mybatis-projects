@@ -58,6 +58,16 @@ public class StudentMapperTest {
   }
   
   @Test
+  public void testGetStuByIdReturnMap() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      Map<String, Object> stuByIdReturnMap = mapper.getStuByIdReturnMap(1);
+      Assertions.assertEquals("nana", stuByIdReturnMap.get("lastName"));
+      Assertions.assertEquals(1, stuByIdReturnMap.get("gender"));
+    }
+  }
+  
+  @Test
   public void testGetStusByLastNameLike() {
     try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);

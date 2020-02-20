@@ -12,6 +12,8 @@ import site.bulibucai.bean.Student;
  */
 public interface StudentMapper {
 
+  Map<String, Object> getStuByIdReturnMap(Integer id);
+
   List<Student> getStusByLastNameLike(String lastName);
 
   Student getStuById(@Param("id") Integer id);
