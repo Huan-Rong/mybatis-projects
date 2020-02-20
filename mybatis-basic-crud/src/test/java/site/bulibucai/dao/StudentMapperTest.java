@@ -6,6 +6,7 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.apache.ibatis.io.Resources;
@@ -54,6 +55,16 @@ public class StudentMapperTest {
       return "sqlserver";
     }
     return null;
+  }
+  
+  @Test
+  public void testGetStusByLastNameLike() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+      List<Student> stus = mapper.getStusByLastNameLike("%a%");
+      Assertions.assertNotNull(stus);
+      Assertions.assertEquals(1, stus.size());
+    }
   }
 
   @Test
