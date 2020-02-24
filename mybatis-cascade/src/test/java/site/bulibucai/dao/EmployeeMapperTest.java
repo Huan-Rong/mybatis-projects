@@ -81,4 +81,18 @@ public class EmployeeMapperTest {
       Assertions.assertEquals("dev", employee.getDept().getDeptName());
     }
   }
+
+  @Test
+  public void testGetEmpByIdReturnEmpAndDept3() {
+    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+      Employee employee = mapper.getEmpByIdReturnEmpAndDept3(1);
+
+      Assertions.assertNotNull(employee);
+      Assertions.assertEquals("nana", employee.getLastName());
+      Assertions.assertNotNull(employee.getDept());
+      Assertions.assertEquals(1, employee.getDept().getId());
+      Assertions.assertEquals("dev", employee.getDept().getDeptName());
+    }
+  }
 }

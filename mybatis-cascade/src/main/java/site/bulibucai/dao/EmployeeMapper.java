@@ -12,4 +12,6 @@ public interface EmployeeMapper {
   Employee getEmpByIdReturnEmpAndDept(Integer id);
 
   Employee getEmpByIdReturnEmpAndDept2(Integer id);
+
+  Employee getEmpByIdReturnEmpAndDept3(Integer id);
 }

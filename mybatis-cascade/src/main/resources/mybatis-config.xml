@@ -34,5 +34,6 @@
 
   <mappers>
     <mapper resource="mappers/EmployeeMapper.xml"/>
+    <mapper resource="mappers/DepartmentMapper.xml"/>
   </mappers>
 </configuration>

@@ -5,12 +5,12 @@
 <mapper namespace="site.bulibucai.dao.EmployeeMapper">
 
   <resultMap id="empAndDept" type="site.bulibucai.bean.Employee">
-    <id column="id" property="id"></id>
-    <result column="lastName" property="lastName"></result>
-    <result column="gender" property="gender"></result>
-    <result column="email" property="email"></result>
-    <result column="deptId" property="dept.id"></result>
-    <result column="deptName" property="dept.deptName"></result>
+    <id column="id" property="id"/>
+    <result column="lastName" property="lastName"/>
+    <result column="gender" property="gender"/>
+    <result column="email" property="email"/>
+    <result column="deptId" property="dept.id"/>
+    <result column="deptName" property="dept.deptName"/>
   </resultMap>
 
   <select id="getEmpByIdReturnEmpAndDept" resultMap="empAndDept">
@@ -21,13 +21,13 @@
   </select>
 
   <resultMap id="empAndDept2" type="site.bulibucai.bean.Employee">
-    <id column="id" property="id"></id>
-    <result column="lastName" property="lastName"></result>
-    <result column="gender" property="gender"></result>
-    <result column="email" property="email"></result>
+    <id column="id" property="id"/>
+    <result column="lastName" property="lastName"/>
+    <result column="gender" property="gender"/>
+    <result column="email" property="email"/>
     <association property="dept" javaType="site.bulibucai.bean.Department">
-      <id column="deptId" property="id"></id>
-      <result column="deptName" property="deptName"></result>
+      <id column="deptId" property="id"/>
+      <result column="deptName" property="deptName"/>
     </association>
   </resultMap>
 
@@ -38,4 +38,15 @@
     where e.id=#{id}
   </select>
 
+  <resultMap id="empAndDept3" type="site.bulibucai.bean.Employee">
+    <id column="id" property="id"/>
+    <result column="last_name" property="lastName"/>
+    <result column="gender" property="gender"/>
+    <result column="email" property="email"/>
+    <association property="dept" select="site.bulibucai.dao.DepartmentMapper.getDeptById" column="dept_id"/>
+  </resultMap>
+
+  <select id="getEmpByIdReturnEmpAndDept3" resultMap="empAndDept3">
+    select * from employee where id=#{id}
+  </select>
 </mapper>
